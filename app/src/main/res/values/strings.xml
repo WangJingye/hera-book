@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Hera</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="exit_massage">再按一次退出</string>
+    <string name="connect_timeout">连接超时</string>
+    <string name="connect_exception">网络异常</string>
+    <string name="login">登录中</string>
+    <string name="login_success">登录成功</string>
+    <string name="text_login_btn">登 录</string>
+    <string name="text_logout_btn">退出登录</string>
+    <string name="title_main">我</string>
+    <string name="text_password_hint">密码</string>
+    <string name="text_login_title">账户登录</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_register">注册</string>
+    <string name="please_enter_username">请输入登录账号</string>
+    <string name="please_enter_password">请输入密码</string>
+    <string name="please_enter_telephone">请输入手机号</string>
+    <string name="please_enter_verify_code">请输入验证码</string>
+    <string name="text_send_verify_code">发送验证码</string>
+    <string name="text_username_hint">手机号/用户名/邮箱</string>
+    <string name="text_telephone">手机号</string>
+    <string name="text_reset_password_hint">6&#8211;16位字母与数字组合的密码</string>
+    <string name="text_reset_new_password">输入新密码</string>
+    <string name="text_reset_confirm_password">确认新密码</string>
+    <string name="text_next">下一步</string>
+    <string name="text_submit">提交</string>
+    <string name="please_enter_new_password">请输入新密码</string>
+    <string name="please_enter_confirm_password">请输入新确认密码</string>
+    <string name="password_reset_check">两次密码输入不一致</string>
+    <string name="text_forget_password">忘记密码</string>
+    <string name="title_reset_password_check">找回密码</string>
+    <string name="title_reset_password">设置新登录密码</string>
+</resources>

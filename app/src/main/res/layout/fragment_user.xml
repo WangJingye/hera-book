@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:clipToPadding="true"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical">
+  <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="user"/>
+
+  <TextView android:id="@+id/logout_confirm"
+            android:layout_width="match_parent"
+            android:background="@drawable/border_white"
+            android:layout_marginTop="25dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/text_logout_btn"
+            android:textColor="@color/colorDefault"
+            android:textSize="@dimen/middle_text"/>
+
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:background="@drawable/bg_message">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center">
+
+            <com.delcache.hera.view.ConfirmView
+                android:id="@+id/message_confirm"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/message_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10"
+                android:layout_marginLeft="@dimen/margin20"
+                android:layout_marginRight="@dimen/margin20"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textColor="@color/colorDefault"
+                android:textSize="@dimen/micro_text"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>
