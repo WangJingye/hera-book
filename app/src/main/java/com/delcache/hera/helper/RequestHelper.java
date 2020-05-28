@@ -5,9 +5,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 import com.delcache.hera.BuildConfig;
-import com.delcache.hera.bean.HttpResult;
-import com.delcache.hera.bean.ResetTokenBean;
-import com.delcache.hera.bean.UserBean;
+import com.delcache.hera.bean.*;
 import com.delcache.hera.interfaces.ApiInterface;
 import com.delcache.hera.utils.Constants;
 import com.delcache.hera.utils.Utils;
@@ -16,13 +14,20 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
+import org.jetbrains.annotations.NotNull;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class RequestHelper {
@@ -47,7 +52,19 @@ public class RequestHelper {
         httpClientBuilder.connectTimeout(DEFAULT_CONNECT_TIMEOUT, TimeUnit.SECONDS);
         httpClientBuilder.readTimeout(DEFAULT_READ_TIMEOUT, TimeUnit.SECONDS);
         httpClientBuilder.writeTimeout(DEFAULT_WRITE_TIMEOUT, TimeUnit.SECONDS);
+        httpClientBuilder.addInterceptor(chain -> {
+            Request original = chain.request();
+            Request.Builder builder = original.newBuilder();
+            Map<String, String> tokens = getRequestToken();
+            builder.addHeader("token", tokens.get("token"));
+            builder.addHeader("timestamp", tokens.get("timestamp"));
+            builder.addHeader("identity", tokens.get("identity"));
+            Request request = builder
+                    .method(original.method(), original.body())
+                    .build();
+            return chain.proceed(request);
 
+        });
         setParam(httpClientBuilder);
 
         retrofit = new Retrofit.Builder()
@@ -152,8 +169,8 @@ public class RequestHelper {
      * @param passWord
      * @return
      */
-    public Observable<UserBean> login(String userName, String passWord) {
-        return apiServer.login(getRequestToken(), userName, passWord).compose(this.applySchedulers());
+    public Observable<UserBean> loginRequest(String userName, String passWord) {
+        return apiServer.login(userName, passWord).compose(this.applySchedulers());
     }
 
     /**
@@ -162,8 +179,8 @@ public class RequestHelper {
      * @param telephone
      * @return
      */
-    public Observable<Object> sendVerifyCode(String telephone, int type) {
-        return apiServer.sendVerifyCode(getRequestToken(), telephone, type).compose(this.applySchedulers());
+    public Observable<Object> sendVerifyCodeRequest(String telephone, int type) {
+        return apiServer.sendVerifyCode(telephone, type).compose(this.applySchedulers());
     }
 
     /**
@@ -172,8 +189,8 @@ public class RequestHelper {
      * @param telephone
      * @return
      */
-    public Observable<ResetTokenBean> checkVerifyCode(String telephone, String verifyCode, int type) {
-        return apiServer.checkVerifyCode(getRequestToken(), telephone, verifyCode, type).compose(this.applySchedulers());
+    public Observable<ResetTokenBean> checkVerifyCodeRequest(String telephone, String verifyCode, int type) {
+        return apiServer.checkVerifyCode(telephone, verifyCode, type).compose(this.applySchedulers());
     }
 
     /**
@@ -182,8 +199,37 @@ public class RequestHelper {
      * @param telephone
      * @return
      */
-    public Observable<Object> resetPassword(String telephone, String resetToken, String password, String confirmPassword) {
-        return apiServer.resetPassword(getRequestToken(), telephone, resetToken, password, confirmPassword).compose(this.applySchedulers());
+    public Observable<Object> resetPasswordRequest(String telephone, String resetToken, String password, String confirmPassword) {
+        return apiServer.resetPassword(telephone, resetToken, password, confirmPassword).compose(this.applySchedulers());
+    }
+
+    /**
+     * 获取主页
+     *
+     * @return
+     */
+    public Observable<HomeBean> homeRequest() {
+        return apiServer.home().compose(this.applySchedulers());
+    }
+
+    public Observable<List<BookBean>> getCollectionRequest() {
+        return apiServer.getCollection().compose(this.applySchedulers());
+    }
+
+    public Observable<BookBean> bookInfoRequest(int bookId) {
+        return apiServer.getBookInfo(bookId).compose(this.applySchedulers());
+    }
+
+    public Observable<BookMenuBean> bookDetailRequest(int bookId, int menuId) {
+        return apiServer.getBookDetail(bookId, menuId).compose(this.applySchedulers());
+    }
+
+    public Observable<Object> addToCollectionRequest(int bookId) {
+        return apiServer.addToCollection(bookId).compose(this.applySchedulers());
+    }
+
+    public Observable<List<BookMenuBean>> getMenuListRequest(int bookId) {
+        return apiServer.getMenuList(bookId).compose(this.applySchedulers());
     }
 
 }

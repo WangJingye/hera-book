@@ -8,6 +8,7 @@ public class Constants {
     public static Boolean isExit = false;
 
     public static String SP_NAME = "sp_base";
+    public static String IMAGE_SAVE_PATH = "image_base";
     public static String versionCode = "";
 
     public static boolean isFirstLogin = true;

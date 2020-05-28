@@ -9,6 +9,7 @@ import com.delcache.hera.activity.MainActivity;
 import com.delcache.hera.fragment.user.FragmentLogin;
 import com.delcache.hera.utils.Config;
 import com.delcache.hera.utils.ConstantStore;
+import com.delcache.hera.utils.Constants;
 
 import java.util.List;
 
@@ -45,14 +46,21 @@ public class FragmentHelper {
         addFragment(fragment, anim);
     }
 
+    public void removeAllFragment() {
+        if (fragmentManager.getFragments() != null && fragmentManager.getFragments().size() > 0) {
+            fragmentManager.getFragments().clear();
+        }
+    }
+
     public void addFragment(Fragment fragment, Integer[] anim) {
         if (isInStack(fragment.getClass().getSimpleName())) {
             return;
         }
         List<String> needLoginFragment = Config.getLoginAction();
+        Constants.identity = activity.getSharedPreferences(ConstantStore.SP_NAME, Context.MODE_PRIVATE).getString("identity", "");
         //当前fragment需要登录并且当前用户未登录
         if (needLoginFragment.contains(fragment.getClass().getSimpleName())
-                && "".equals(activity.getSharedPreferences(ConstantStore.SP_NAME, Context.MODE_PRIVATE).getString("identity", ""))) {
+                && "".equals(Constants.identity)) {
             fragment = new FragmentLogin();
         }
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -103,10 +111,11 @@ public class FragmentHelper {
         goBack();
         addFragment(fragment);
     }
+
     //删除当前fragment并且新增一个
-    public void replaceFragment(Fragment fragment,Integer[] anim) {
+    public void replaceFragment(Fragment fragment, Integer[] anim) {
         goBack();
-        addFragment(fragment,anim);
+        addFragment(fragment, anim);
     }
 
     public void redirectLogin() {
@@ -117,6 +126,10 @@ public class FragmentHelper {
                 R.anim.fragment_slide_out_to_top,
         };
         addFragment(new FragmentLogin(), anim);
+    }
+
+    public void redirectHome() {
+        activity.getBottomBar().setSelectedItemId(R.id.bottom_item_1);
     }
 
     private boolean isInStack(String fragName) {

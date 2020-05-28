@@ -87,17 +87,17 @@ public class CustomToolbar extends Toolbar {
 
     //设置title左边图标
     public void setLeftTitleDrawable(int res) {
-        Drawable dwLeft = ContextCompat.getDrawable(getContext(), res);
-        dwLeft.setBounds(0, 0, dwLeft.getMinimumWidth(), dwLeft.getMinimumHeight());
-        mTxtLeftTitle.setCompoundDrawables(dwLeft, null, null, null);
+        Drawable dw = ContextCompat.getDrawable(getContext(), res);
+        dw.setBounds(0, 0, dw.getMinimumWidth(), dw.getMinimumHeight());
+        mTxtLeftTitle.setCompoundDrawables(dw, null, null, null);
     }
 
     //设置title左边图标
     public void setLeftTitleDrawable(int res, int color) {
-        Drawable dwLeft = ContextCompat.getDrawable(getContext(), res);
-        dwLeft.setBounds(0, 0, dwLeft.getMinimumWidth(), dwLeft.getMinimumHeight());
-        dwLeft.setTint(color);
-        mTxtLeftTitle.setCompoundDrawables(dwLeft, null, null, null);
+        Drawable dw = ContextCompat.getDrawable(getContext(), res);
+        dw.setBounds(0, 0, dw.getMinimumWidth(), dw.getMinimumHeight());
+        dw.setTint(color);
+        mTxtLeftTitle.setCompoundDrawables(dw, null, null, null);
     }
 
     //设置title左边图标
@@ -138,9 +138,17 @@ public class CustomToolbar extends Toolbar {
 
     //设置title右边图标
     public void setRightTitleDrawable(int res) {
-        Drawable dwRight = ContextCompat.getDrawable(getContext(), res);
-        dwRight.setBounds(0, 0, dwRight.getMinimumWidth(), dwRight.getMinimumHeight());
-        mTxtRightTitle.setCompoundDrawables(null, null, dwRight, null);
+        Drawable dw = ContextCompat.getDrawable(getContext(), res);
+        dw.setBounds(0, 0, dw.getMinimumWidth(), dw.getMinimumHeight());
+        mTxtRightTitle.setCompoundDrawables(null, null, dw, null);
+    }
+
+    //设置title右边图标
+    public void setRightTitleDrawable(int res,int color) {
+        Drawable dw = ContextCompat.getDrawable(getContext(), res);
+        dw.setBounds(0, 0, dw.getMinimumWidth(), dw.getMinimumHeight());
+        dw.setTint(color);
+        mTxtRightTitle.setCompoundDrawables(null, null, dw, null);
     }
 
     //设置title右边点击事件

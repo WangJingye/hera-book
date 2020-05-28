@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Hera</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_home">书城</string>
+    <string name="title_dashboard">书架</string>
     <string name="title_notifications">Notifications</string>
     <string name="exit_massage">再按一次退出</string>
     <string name="connect_timeout">连接超时</string>
@@ -33,4 +33,19 @@
     <string name="text_forget_password">忘记密码</string>
     <string name="title_reset_password_check">找回密码</string>
     <string name="title_reset_password">设置新登录密码</string>
+    <string name="error_and_restart">崩溃了&#8230;&#8230;&#8230;</string>
+    <string name="holder_book_title">一念永恒</string>
+    <string name="holder_book_author">耳根</string>
+    <string name="holder_book_category">玄幻修仙</string>
+    <string name="text_collect_empty">书架空了，快去添加吧</string>
+    <string name="text_go_to_list">去书城逛逛</string>
+    <string name="text_detail">详情</string>
+    <string name="text_menu">目录</string>
+    <string name="holder_book_status">完结，共1639章</string>
+    <string name="text_sort_asc">正序</string>
+    <string name="text_sort_desc">倒序</string>
+    <string name="text_add_to_collect">加书架</string>
+    <string name="text_collecting">在书架</string>
+    <string name="text_read">阅读</string>
+    <string name="text_download">下载</string>
 </resources>

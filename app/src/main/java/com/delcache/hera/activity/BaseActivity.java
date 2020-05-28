@@ -10,8 +10,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 import butterknife.ButterKnife;
+import com.delcache.hera.base.UIApplication;
 import com.delcache.hera.utils.ConstantStore;
 import com.delcache.hera.utils.MyLogger;
+import com.delcache.hera.utils.StringTool;
 
 public abstract class BaseActivity extends FragmentActivity {
 
@@ -20,7 +22,7 @@ public abstract class BaseActivity extends FragmentActivity {
     protected Context mContext;
 
     protected SharedPreferences preferences;
-
+    protected UIApplication application;
     protected abstract void setupView();
 
     protected abstract void setupData();
@@ -62,7 +64,8 @@ public abstract class BaseActivity extends FragmentActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-
+        application = (UIApplication) getApplication();
+        StringTool.getInstance().setApplication(application);
         setupView();
         setupData();
         sendRequest();

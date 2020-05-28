@@ -48,10 +48,6 @@ public class BaseFragment extends Fragment implements RefreshUIInterface, OnClic
     protected void sendRequest() {
     }
 
-    protected int isDisplayTopMenu() {
-        return View.GONE;
-    }
-
     protected int isDisplayBottomMenu() {
         return View.GONE;
     }
@@ -106,16 +102,7 @@ public class BaseFragment extends Fragment implements RefreshUIInterface, OnClic
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity) mContext).setToolbarVisibility(isDisplayTopMenu());
         ((MainActivity) mContext).setBottombarVisibility(isDisplayBottomMenu());
-    }
-
-    public void setTitle(String title) {
-        ((MainActivity) mContext).getToolbar().setMainTitle(title);
-    }
-
-    public CustomToolbar getToolbar() {
-        return ((MainActivity) mContext).getToolbar();
     }
 
     protected String getParam() {
@@ -124,6 +111,7 @@ public class BaseFragment extends Fragment implements RefreshUIInterface, OnClic
         else
             return "";
     }
+
     /**
      * 弹出toast message
      *
@@ -141,11 +129,20 @@ public class BaseFragment extends Fragment implements RefreshUIInterface, OnClic
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.txt_left_title:
+                FragmentHelper.getInstance().goBack();
+                break;
+        }
+    }
+
+    @Override
+    public void refreshUI(Object object) {
 
     }
 
     @Override
-    public void doRefreshUI(int type) {
+    public void refreshWithResult(Object object, int type) {
 
     }
 

@@ -7,10 +7,12 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.view.View;
 import butterknife.BindView;
 import com.delcache.hera.R;
 import com.delcache.hera.fragment.base.BaseFragment;
 import com.delcache.hera.fragment.home.FragmentHome;
+import com.delcache.hera.fragment.user.FragmentCollect;
 import com.delcache.hera.fragment.user.FragmentLogin;
 import com.delcache.hera.fragment.user.FragmentUser;
 import com.delcache.hera.helper.FragmentHelper;
@@ -27,9 +29,6 @@ public class MainActivity extends BaseActivity implements BackHandledInterface {
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
 
-    @BindView(R.id.main_toolbar)
-    CustomToolbar mToolbar;
-
     private BaseFragment baseFragment;
 
     private List<Fragment> fragments = new ArrayList<>();
@@ -44,9 +43,10 @@ public class MainActivity extends BaseActivity implements BackHandledInterface {
                     setMainFragment(0);
                     return true;
                 case R.id.bottom_item_2:
+                    setMainFragment(1);
                     return true;
                 case R.id.bottom_item_3:
-                    setMainFragment(1);
+                    setMainFragment(2);
                     return true;
                 default:
                     return false;
@@ -58,6 +58,7 @@ public class MainActivity extends BaseActivity implements BackHandledInterface {
     protected void setupView() {
         FragmentHelper.getInstance().setActivity(this);
         fragments.add(new FragmentHome());
+        fragments.add(new FragmentCollect());
         fragments.add(new FragmentUser());
         setMainFragment(0);
     }
@@ -66,6 +67,11 @@ public class MainActivity extends BaseActivity implements BackHandledInterface {
     protected void setupData() {
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigationView.setSelectedItemId(R.id.bottom_item_1);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -84,14 +90,6 @@ public class MainActivity extends BaseActivity implements BackHandledInterface {
         init(R.layout.activity_main);
     }
 
-    public void setToolbarVisibility(int visibility) {
-        mToolbar.setVisibility(visibility);
-    }
-
-    public CustomToolbar getToolbar() {
-        return mToolbar;
-    }
-
     public void setBottombarVisibility(int visibility) {
         bottomNavigationView.setVisibility(visibility);
     }
@@ -103,7 +101,12 @@ public class MainActivity extends BaseActivity implements BackHandledInterface {
 
     public void setMainFragment(int index) {
         Fragment fragment = fragments.get(index);
+        FragmentHelper.getInstance().removeAllFragment();
         FragmentHelper.getInstance().addFragment(fragment, new Integer[]{0, 0, 0, 0});
+    }
+
+    public BottomNavigationView getBottomBar() {
+        return bottomNavigationView;
     }
 
     public void setSelectedTab(int index) {

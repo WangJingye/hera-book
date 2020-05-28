@@ -33,6 +33,7 @@ public class Utils {
 
     /**
      * token 加密
+     *
      * @param s
      * @return
      */
@@ -84,10 +85,14 @@ public class Utils {
 
     public static void setAdapterEmptyView(Context context, int layoutId, AdapterView adapterView) {
         View emptyView = LayoutInflater.from(context).inflate(layoutId, null);
+        setAdapterEmptyView(emptyView, adapterView);
+    }
+
+    public static void setAdapterEmptyView(View emptyView, AdapterView adapterView) {
         emptyView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         emptyView.setVisibility(View.GONE);
         if (adapterView instanceof GridView)
-            ((ViewGroup) adapterView.getParent().getParent()).addView(emptyView);
+            ((ViewGroup) adapterView.getParent()).addView(emptyView);
         else
             ((ViewGroup) adapterView.getParent()).addView(emptyView);
         adapterView.setEmptyView(emptyView);

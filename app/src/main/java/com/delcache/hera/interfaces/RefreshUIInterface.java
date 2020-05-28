@@ -7,7 +7,13 @@ public interface RefreshUIInterface {
     /**
      * 更新UI
      */
-    void doRefreshUI(int type);
+    void refreshUI(Object object);
+
+    /**
+     * 更新UI
+     */
+    void refreshWithResult(Object object, int type);
+
 
     void doError(int type);
 }

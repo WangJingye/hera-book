@@ -22,6 +22,10 @@ public class StringTool {
         application = app;
     }
 
+    public Application getApplication() {
+        return application;
+    }
+
     public String getStingById(int stringId) {
         return application.getString(stringId);
     }

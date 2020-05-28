@@ -1,31 +1,52 @@
 package com.delcache.hera.interfaces;
 
-import com.delcache.hera.bean.HttpResult;
-import com.delcache.hera.bean.ResetTokenBean;
-import com.delcache.hera.bean.UserBean;
+import com.delcache.hera.bean.*;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("v1/public/login")
-    Observable<HttpResult<UserBean>> login(@QueryMap Map<String, String> token, @Field("username") String userName, @Field("password") String passWord);
+    Observable<HttpResult<UserBean>> login(@Field("username") String userName, @Field("password") String passWord);
 
     @FormUrlEncoded
     @POST("v1/public/send-verify-code")
-    Observable<HttpResult<Object>> sendVerifyCode(@QueryMap Map<String, String> token, @Field("telephone") String telephone, @Field("type") int type);
+    Observable<HttpResult<Object>> sendVerifyCode(@Field("telephone") String telephone, @Field("type") int type);
 
     @FormUrlEncoded
     @POST("v1/public/check-verify-code")
-    Observable<HttpResult<ResetTokenBean>> checkVerifyCode(@QueryMap Map<String, String> token, @Field("telephone") String telephone, @Field("verify_code") String verifyCode, @Field("type") int type);
+    Observable<HttpResult<ResetTokenBean>> checkVerifyCode(@Field("telephone") String telephone, @Field("verify_code") String verifyCode, @Field("type") int type);
 
     @FormUrlEncoded
     @POST("v1/public/reset-password")
-    Observable<HttpResult<Object>> resetPassword(@QueryMap Map<String, String> token, @Field("telephone") String telephone, @Field("reset_token") String resetToken, @Field("password") String password, @Field("confirm_password") String confirmPassword);
+    Observable<HttpResult<Object>> resetPassword(@Field("telephone") String telephone, @Field("reset_token") String resetToken, @Field("password") String password, @Field("confirm_password") String confirmPassword);
+
+    @POST("v1/home/index")
+    Observable<HttpResult<HomeBean>> home();
+
+    @POST("v1/user/get-collection")
+    Observable<HttpResult<List<BookBean>>> getCollection();
+
+    @FormUrlEncoded
+    @POST("v1/book/info")
+    Observable<HttpResult<BookBean>> getBookInfo(@Field("book_id") int bookId);
+
+    @FormUrlEncoded
+    @POST("v1/book/detail")
+    Observable<HttpResult<BookMenuBean>> getBookDetail(@Field("book_id") int bookId, @Field("menu_id") int menuId);
+
+    @FormUrlEncoded
+    @POST("v1/user/add-to-collection")
+    Observable<HttpResult<Object>> addToCollection(@Field("book_id") int bookId);
+
+    @FormUrlEncoded
+    @POST("v1/book/get-menu-list")
+    Observable<HttpResult<List<BookMenuBean>>> getMenuList(@Field("book_id") int bookId);
 }

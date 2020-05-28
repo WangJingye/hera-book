@@ -20,13 +20,8 @@ public class PublicController extends Controller {
         super(mContext, refreshUIInterface);
     }
 
-    @Override
-    protected boolean onBackPressed() {
-        return false;
-    }
-
     public void login(String userName, String passWord) {
-        RequestHelper.getInstance().login(userName, passWord)
+        RequestHelper.getInstance().loginRequest(userName, passWord)
                 .doOnNext(loginBean -> {
                     putStringToSharePreference("userId", loginBean.getUserId());
                     putStringToSharePreference("identity", loginBean.getIdentity());
@@ -41,11 +36,11 @@ public class PublicController extends Controller {
     }
 
     public void sendVerifyCode(String telephone, int type) {
-        RequestHelper.getInstance(mContext, true).sendVerifyCode(telephone, type).subscribe(new ProgressSubscriber(mContext, false));
+        RequestHelper.getInstance(mContext, true).sendVerifyCodeRequest(telephone, type).subscribe(new ProgressSubscriber(mContext, false));
     }
 
     public void checkVerifyCode(String telephone, String verifyCode, int type) {
-        RequestHelper.getInstance().checkVerifyCode(telephone, verifyCode, type)
+        RequestHelper.getInstance().checkVerifyCodeRequest(telephone, verifyCode, type)
                 .subscribe(new ProgressSubscriber<ResetTokenBean>(mContext, false) {
                     @Override
                     public void success() {
@@ -64,7 +59,7 @@ public class PublicController extends Controller {
     }
 
     public void resetPassword(String telephone, String resetToken, String password, String confirmPassowrd) {
-        RequestHelper.getInstance().resetPassword(telephone, resetToken, password, confirmPassowrd)
+        RequestHelper.getInstance().resetPasswordRequest(telephone, resetToken, password, confirmPassowrd)
                 .subscribe(new ProgressSubscriber(mContext, false) {
                     @Override
                     public void success() {

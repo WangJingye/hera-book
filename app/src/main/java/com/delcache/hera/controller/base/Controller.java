@@ -15,14 +15,12 @@ public abstract class Controller {
         this.refreshUIInterface = refreshUIInterface;
     }
 
-    /**
-     * 返回重写
-     */
-    protected abstract boolean onBackPressed();
-
-
     protected void putStringToSharePreference(String key, String value) {
         mContext.getSharedPreferences(ConstantStore.SP_NAME, Context.MODE_PRIVATE).edit().putString(key, value).commit();
+    }
+
+    protected void getStringFromSharePreference(String key) {
+        mContext.getSharedPreferences(ConstantStore.SP_NAME, Context.MODE_PRIVATE).getString(key, "");
     }
 
     public String getString(int id) {
