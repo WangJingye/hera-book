@@ -48,4 +48,5 @@
     <string name="text_collecting">在书架</string>
     <string name="text_read">阅读</string>
     <string name="text_download">下载</string>
+    <string name="text_night_mode">夜间模式</string>
 </resources>

@@ -22,6 +22,8 @@ public class Constants {
     public static String tagType = "";
 
     public static String identity = "";
+    public static boolean readMode = false;
+    public static int screenBrightness = 255;
 
     public static boolean longClick = false;
 

@@ -8,6 +8,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.delcache.hera.R;
 import com.delcache.hera.bean.BookMenuBean;
+import com.delcache.hera.utils.Constants;
+import com.delcache.hera.utils.Utils;
 
 import java.util.List;
 
@@ -15,8 +17,15 @@ import java.util.List;
  * 适配器
  */
 public class DetailListAdapter extends BaseListAdapter {
+    private int fromType = 0;
+
     public DetailListAdapter(Context context, List list) {
         super(context, list);
+    }
+
+    public DetailListAdapter(Context context, List list, int fromType) {
+        super(context, list);
+        this.fromType = fromType;
     }
 
     @Override
@@ -41,6 +50,10 @@ public class DetailListAdapter extends BaseListAdapter {
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
+            if (fromType == 1 && Constants.readMode) {
+                view.setBackgroundColor(Utils.getColor(mContext, R.color.colorGray));
+                titleText.setTextColor(Utils.getColor(mContext, R.color.colorNight));
+            }
         }
     }
 }

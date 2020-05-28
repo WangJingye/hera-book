@@ -14,6 +14,7 @@ import com.delcache.hera.adapter.HomeListAdapter;
 import com.delcache.hera.bean.HomeBean;
 import com.delcache.hera.controller.user.BookController;
 import com.delcache.hera.fragment.base.BaseFragment;
+import com.delcache.hera.utils.Constants;
 import com.delcache.hera.utils.Utils;
 
 public class FragmentHome extends BaseFragment {
@@ -23,7 +24,7 @@ public class FragmentHome extends BaseFragment {
     @BindView(R.id.home_list)
     ListView homeListView;
     private HomeListAdapter listAdapter;
-    private  BookController bookController;
+    private BookController bookController;
 
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, ViewGroup container,
@@ -59,6 +60,7 @@ public class FragmentHome extends BaseFragment {
             listAdapter.notifyDataSetChanged();
         }
     }
+
     @Override
     protected int isDisplayBottomMenu() {
         return View.VISIBLE;

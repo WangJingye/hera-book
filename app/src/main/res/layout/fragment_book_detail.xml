@@ -11,7 +11,9 @@
     <ScrollView
             android:id="@+id/detail_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp">
         <TextView
                 android:id="@+id/book_detail"
                 android:layout_width="match_parent"

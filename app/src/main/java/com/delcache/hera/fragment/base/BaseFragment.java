@@ -1,6 +1,7 @@
 package com.delcache.hera.fragment.base;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +15,13 @@ import com.delcache.hera.R;
 import com.delcache.hera.activity.MainActivity;
 import com.delcache.hera.helper.ActivityHelper;
 import com.delcache.hera.helper.FragmentHelper;
+import com.delcache.hera.helper.SettingHelper;
 import com.delcache.hera.interfaces.BackHandledInterface;
 import com.delcache.hera.interfaces.RefreshUIInterface;
 import com.delcache.hera.utils.ConstantStore;
+import com.delcache.hera.utils.Constants;
 import com.delcache.hera.utils.MyLogger;
+import com.delcache.hera.utils.Utils;
 import com.delcache.hera.widget.CustomToolbar;
 
 /**
@@ -70,7 +74,6 @@ public class BaseFragment extends Fragment implements RefreshUIInterface, OnClic
                             WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
             mContainerView = LayoutInflater.from(mContext).inflate(resId, parent, false);
-
             ButterKnife.bind(this, mContainerView);
             setupView(mContainerView);
             setupData();
@@ -103,6 +106,15 @@ public class BaseFragment extends Fragment implements RefreshUIInterface, OnClic
     public void onResume() {
         super.onResume();
         ((MainActivity) mContext).setBottombarVisibility(isDisplayBottomMenu());
+        Constants.readMode = false;
+        if ("night_mode".equals(getStringFromSharePreference("readMode"))) {
+            Constants.readMode = true;
+        }
+        if (Constants.readMode) {
+            SettingHelper.getInstance(mContext).setScreenBrightness(0);
+        } else {
+            SettingHelper.getInstance(mContext).setScreenBrightness(Constants.screenBrightness);
+        }
     }
 
     protected String getParam() {

@@ -19,6 +19,7 @@ import com.delcache.hera.controller.user.UserController;
 import com.delcache.hera.fragment.base.BaseFragment;
 import com.delcache.hera.fragment.book.FragmentBookDetail;
 import com.delcache.hera.helper.FragmentHelper;
+import com.delcache.hera.utils.Constants;
 import com.delcache.hera.utils.Utils;
 
 import java.util.ArrayList;

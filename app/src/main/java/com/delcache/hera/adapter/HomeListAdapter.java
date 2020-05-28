@@ -14,7 +14,9 @@ import com.delcache.hera.bean.BookBean;
 import com.delcache.hera.bean.BookListBean;
 import com.delcache.hera.fragment.book.FragmentBookInfo;
 import com.delcache.hera.helper.FragmentHelper;
+import com.delcache.hera.utils.Constants;
 import com.delcache.hera.utils.MyLogger;
+import com.delcache.hera.utils.Utils;
 import com.delcache.hera.view.ExpandListView;
 
 import java.util.ArrayList;

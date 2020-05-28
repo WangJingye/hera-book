@@ -11,6 +11,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.delcache.hera.R;
+import com.delcache.hera.utils.Constants;
+import com.delcache.hera.utils.Utils;
 
 /**
  * 自定义Toolbar
@@ -44,7 +46,7 @@ public class CustomToolbar extends Toolbar {
     }
 
     private void init(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.action_toolbar, this);
+        View view = LayoutInflater.from(context).inflate(R.layout.action_toolbar, this);
         ButterKnife.bind(this);
     }
 
@@ -144,7 +146,7 @@ public class CustomToolbar extends Toolbar {
     }
 
     //设置title右边图标
-    public void setRightTitleDrawable(int res,int color) {
+    public void setRightTitleDrawable(int res, int color) {
         Drawable dw = ContextCompat.getDrawable(getContext(), res);
         dw.setBounds(0, 0, dw.getMinimumWidth(), dw.getMinimumHeight());
         dw.setTint(color);

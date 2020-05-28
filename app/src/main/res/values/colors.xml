@@ -12,4 +12,5 @@
     <color name="transparent">#00000000</color>
     <color name="colorInfo">#5BC0DE</color>
     <color name="colorSuccess">#5CB85C</color>
+    <color name="colorNight">#c7c7c7</color>
 </resources>

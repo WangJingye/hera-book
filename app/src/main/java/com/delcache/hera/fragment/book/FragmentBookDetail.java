@@ -14,6 +14,8 @@ import com.delcache.hera.bean.BookMenuBean;
 import com.delcache.hera.controller.user.BookController;
 import com.delcache.hera.fragment.base.BaseFragment;
 import com.delcache.hera.helper.FragmentHelper;
+import com.delcache.hera.utils.Constants;
+import com.delcache.hera.utils.Utils;
 import com.delcache.hera.widget.CustomToolbar;
 
 import java.util.Collections;
@@ -43,7 +45,17 @@ public class FragmentBookDetail extends BaseFragment {
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return init(R.layout.fragment_book_detail, container);
+        View view = init(R.layout.fragment_book_detail, container);
+        if (Constants.readMode) {
+            view.setBackgroundColor(Utils.getColor(mContext, R.color.colorGray));
+            detailScrollView.setBackgroundColor(Utils.getColor(mContext, R.color.colorGray));
+            toolbar.setBackgroundColor(Utils.getColor(mContext, R.color.colorGray));
+            toolbar.setLeftTitleColor(Utils.getColor(mContext, R.color.colorNight));
+            toolbar.setMainTitleColor(Utils.getColor(mContext, R.color.colorNight));
+            toolbar.setRightTitleColor(Utils.getColor(mContext, R.color.colorNight));
+            bookDetailView.setTextColor(Utils.getColor(mContext, R.color.colorNight));
+        }
+        return view;
     }
 
     @Override
@@ -153,7 +165,13 @@ public class FragmentBookDetail extends BaseFragment {
         TextView bookStatusView = popupView.findViewById(R.id.book_status);
         bookStatusView.setText(bookBean.getBookStatusWithMenuCount());
         bookSortView.setOnClickListener(this);
-        menuAdapter = new DetailListAdapter(mContext, menuList);
+        menuAdapter = new DetailListAdapter(mContext, menuList,1);
+        if (Constants.readMode) {
+            popupView.setBackgroundColor(Utils.getColor(mContext, R.color.colorGray));
+            menuListView.setBackgroundColor(Utils.getColor(mContext, R.color.colorGray));
+            bookStatusView.setTextColor(Utils.getColor(mContext, R.color.colorNight));
+            bookSortView.setTextColor(Utils.getColor(mContext, R.color.colorNight));
+        }
         menuListView.setAdapter(menuAdapter);
         menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -165,7 +183,7 @@ public class FragmentBookDetail extends BaseFragment {
             }
         });
         //创建Popupwindow 实例，200，LayoutParams.MATCH_PARENT 分别是宽高
-        popupWindow = new PopupWindow(popupView,600, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        popupWindow = new PopupWindow(popupView, 600, ViewGroup.LayoutParams.MATCH_PARENT, true);
         //设置动画效果
         popupWindow.setAnimationStyle(R.anim.in_from_left);
         //点击其他地方消失
