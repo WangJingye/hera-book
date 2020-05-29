@@ -2,29 +2,25 @@ package com.delcache.hera.helper;
 
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.widget.Toast;
 import com.delcache.hera.BuildConfig;
 import com.delcache.hera.bean.*;
+import com.delcache.hera.bean.table.BookBean;
+import com.delcache.hera.bean.table.BookMenuBean;
 import com.delcache.hera.interfaces.ApiInterface;
 import com.delcache.hera.utils.Constants;
 import com.delcache.hera.utils.Utils;
-import com.google.gson.reflect.TypeToken;
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
-import org.jetbrains.annotations.NotNull;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -216,19 +212,19 @@ public class RequestHelper {
         return apiServer.getCollection().compose(this.applySchedulers());
     }
 
-    public Observable<BookBean> bookInfoRequest(int bookId) {
+    public Observable<BookBean> bookInfoRequest(long bookId) {
         return apiServer.getBookInfo(bookId).compose(this.applySchedulers());
     }
 
-    public Observable<BookMenuBean> bookDetailRequest(int bookId, int menuId) {
+    public Observable<BookMenuBean> bookDetailRequest(long bookId, long menuId) {
         return apiServer.getBookDetail(bookId, menuId).compose(this.applySchedulers());
     }
 
-    public Observable<Object> addToCollectionRequest(int bookId) {
+    public Observable<Object> addToCollectionRequest(long bookId) {
         return apiServer.addToCollection(bookId).compose(this.applySchedulers());
     }
 
-    public Observable<List<BookMenuBean>> getMenuListRequest(int bookId) {
+    public Observable<List<BookMenuBean>> getMenuListRequest(long bookId) {
         return apiServer.getMenuList(bookId).compose(this.applySchedulers());
     }
 

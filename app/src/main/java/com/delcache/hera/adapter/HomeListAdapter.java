@@ -10,13 +10,11 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.delcache.hera.R;
-import com.delcache.hera.bean.BookBean;
+import com.delcache.hera.bean.table.BookBean;
 import com.delcache.hera.bean.BookListBean;
 import com.delcache.hera.fragment.book.FragmentBookInfo;
 import com.delcache.hera.helper.FragmentHelper;
-import com.delcache.hera.utils.Constants;
 import com.delcache.hera.utils.MyLogger;
-import com.delcache.hera.utils.Utils;
 import com.delcache.hera.view.ExpandListView;
 
 import java.util.ArrayList;
@@ -34,7 +32,6 @@ public class HomeListAdapter extends BaseListAdapter {
     public View getView(int position, View view, ViewGroup arg2) {
         ViewHolder holder;
         if (view == null) {
-            MyLogger.getLogger().e(position);
             view = mInflater.inflate(R.layout.adapter_home_item_list, null);
             holder = new ViewHolder(view);
             view.setTag(holder);
@@ -53,7 +50,7 @@ public class HomeListAdapter extends BaseListAdapter {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     BookBean bookBean = (BookBean) adapterView.getItemAtPosition(i);
                     Bundle bundle = new Bundle();
-                    bundle.putString("bookId", String.valueOf(bookBean.getBookId()));
+                    bundle.putLong("bookId", bookBean.getBookId());
                     Fragment fragment = new FragmentBookInfo();
                     fragment.setArguments(bundle);
                     FragmentHelper.getInstance().addFragment(fragment);

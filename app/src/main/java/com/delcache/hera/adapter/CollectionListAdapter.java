@@ -8,10 +8,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.delcache.hera.R;
-import com.delcache.hera.bean.BookBean;
+import com.delcache.hera.bean.table.BookBean;
 import com.delcache.hera.helper.ImageHelper;
-import com.delcache.hera.utils.Constants;
-import com.delcache.hera.utils.Utils;
 
 import java.util.List;
 

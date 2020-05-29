@@ -7,7 +7,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.delcache.hera.R;
-import com.delcache.hera.bean.BookMenuBean;
+import com.delcache.hera.bean.table.BookMenuBean;
 import com.delcache.hera.utils.Constants;
 import com.delcache.hera.utils.Utils;
 

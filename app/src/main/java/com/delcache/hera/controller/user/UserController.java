@@ -1,7 +1,7 @@
 package com.delcache.hera.controller.user;
 
 import android.content.Context;
-import com.delcache.hera.bean.BookBean;
+import com.delcache.hera.bean.table.BookBean;
 import com.delcache.hera.controller.base.Controller;
 import com.delcache.hera.helper.RequestHelper;
 import com.delcache.hera.interfaces.RefreshUIInterface;
@@ -15,29 +15,15 @@ public class UserController extends Controller {
         super(mContext, refreshUIInterface);
     }
 
-    public void getCollectionRequest() {
-        RequestHelper.getInstance().getCollectionRequest()
-                .subscribe(new ProgressSubscriber<List<BookBean>>(mContext, false) {
-                    @Override
-                    public void onNext(List<BookBean> list) {
-                        refreshUIInterface.refreshUI(list);
-                    }
-                });
+    public void addToCollection(BookBean bookBean) {
+        bookBean.setPageId(1);
+        bookBean.setIsAdded(1);
+        bookBean.setId(bookBean.getBookId());
+        bookBean.save();
+        refreshUIInterface.refreshWithResult(null, 1);
     }
 
-    public void addToCollectionRequest(int bookId) {
-        RequestHelper.getInstance().addToCollectionRequest(bookId)
-                .subscribe(new ProgressSubscriber(mContext) {
-                    @Override
-                    public void onNext(Object o) {
-                        refreshUIInterface.refreshWithResult(null, 1);
-                    }
-
-                    @Override
-                    public void error(String error) {
-                        super.error(error);
-                    }
-                });
+    public void getCollection() {
+        refreshUIInterface.refreshUI(BookBean.listAll(BookBean.class));
     }
-
 }

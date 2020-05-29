@@ -2,24 +2,20 @@ package com.delcache.hera.fragment.user;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
 import butterknife.BindView;
 import com.delcache.hera.R;
 import com.delcache.hera.activity.MainActivity;
 import com.delcache.hera.adapter.CollectionListAdapter;
-import com.delcache.hera.bean.BookBean;
+import com.delcache.hera.bean.table.BookBean;
 import com.delcache.hera.controller.user.UserController;
 import com.delcache.hera.fragment.base.BaseFragment;
 import com.delcache.hera.fragment.book.FragmentBookDetail;
 import com.delcache.hera.helper.FragmentHelper;
-import com.delcache.hera.utils.Constants;
 import com.delcache.hera.utils.Utils;
 
 import java.util.ArrayList;
@@ -33,7 +29,7 @@ public class FragmentCollect extends BaseFragment {
 
     @BindView(R.id.book_collect_list)
     GridView listView;
-    List<BookBean> list = new ArrayList<>();
+    private List<BookBean> list = new ArrayList<>();
 
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, ViewGroup container,
@@ -45,7 +41,7 @@ public class FragmentCollect extends BaseFragment {
     public void onResume() {
         super.onResume();
         ((MainActivity) mContext).setSelectedTab(1);
-        userController.getCollectionRequest();
+        userController.getCollection();
     }
 
     @Override
@@ -70,17 +66,12 @@ public class FragmentCollect extends BaseFragment {
                 BookBean bookBean = (BookBean) adapterView.getItemAtPosition(position);
                 FragmentBookDetail detail = new FragmentBookDetail();
                 Bundle args = new Bundle();
-                args.putInt("menuId", bookBean.getPageId());
-                args.putInt("bookId", bookBean.getBookId());
+                args.putLong("menuId", bookBean.getPageId());
+                args.putLong("bookId", bookBean.getBookId());
                 detail.setArguments(args);
                 FragmentHelper.getInstance().addFragment(detail);
             }
         });
-    }
-
-    @Override
-    protected void sendRequest() {
-        super.sendRequest();
     }
 
     @Override

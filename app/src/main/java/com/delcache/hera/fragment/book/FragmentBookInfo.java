@@ -1,17 +1,15 @@
 package com.delcache.hera.fragment.book;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.bottomnavigation.LabelVisibilityMode;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,15 +18,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.delcache.hera.R;
-import com.delcache.hera.activity.MainActivity;
 import com.delcache.hera.adapter.DetailListAdapter;
-import com.delcache.hera.bean.BookBean;
-import com.delcache.hera.bean.BookMenuBean;
-import com.delcache.hera.controller.user.BookController;
+import com.delcache.hera.bean.table.BookBean;
+import com.delcache.hera.bean.table.BookMenuBean;
+import com.delcache.hera.controller.book.BookController;
 import com.delcache.hera.controller.user.UserController;
 import com.delcache.hera.fragment.base.BaseFragment;
+import com.delcache.hera.fragment.user.FragmentLogin;
 import com.delcache.hera.helper.FragmentHelper;
 import com.delcache.hera.helper.ImageHelper;
+import com.delcache.hera.utils.Config;
+import com.delcache.hera.utils.ConstantStore;
 import com.delcache.hera.utils.Constants;
 import com.delcache.hera.utils.Utils;
 import com.delcache.hera.widget.CustomToolbar;
@@ -69,7 +69,7 @@ public class FragmentBookInfo extends BaseFragment {
     private List<View> viewList = new ArrayList<>(2);
     private String[] viewPageStrList = {"详情", "目录"};
     private DetailListAdapter detailListAdapter;
-    private int bookId;
+    private long bookId;
     private List<BookMenuBean> menuList;
     private BookBean bookBean;
     private ListView menuListView;
@@ -85,7 +85,7 @@ public class FragmentBookInfo extends BaseFragment {
         bookController = new BookController(mContext, this);
         userController = new UserController(mContext, this);
         if (getArguments() != null) {
-            this.bookId = Integer.parseInt(getArguments().getString("bookId"));
+            this.bookId =getArguments().getLong("bookId");
         }
     }
 
@@ -127,7 +127,6 @@ public class FragmentBookInfo extends BaseFragment {
         return View.GONE;
     }
 
-
     protected void initTabView() {
         View view = null;
         view = getLayoutInflater().inflate(R.layout.fragment_book_info_description, null);
@@ -148,8 +147,8 @@ public class FragmentBookInfo extends BaseFragment {
                 BookMenuBean item = (BookMenuBean) adapterView.getItemAtPosition(position);
                 FragmentBookDetail detail = new FragmentBookDetail();
                 Bundle args = new Bundle();
-                args.putInt("menuId", item.getMenuId());
-                args.putInt("bookId", bookId);
+                args.putLong("menuId", item.getMenuId());
+                args.putLong("bookId", bookId);
                 detail.setArguments(args);
                 FragmentHelper.getInstance().addFragment(detail);
             }
@@ -221,13 +220,18 @@ public class FragmentBookInfo extends BaseFragment {
                 showMenuList();
                 break;
             case R.id.add_to_collect:
-                userController.addToCollectionRequest(bookId);
+                   //当前fragment需要登录并且当前用户未登录
+                if ("".equals(Constants.identity)) {
+                    FragmentHelper.getInstance().redirectLogin();
+                }else {
+                    userController.addToCollection(bookBean);
+                }
                 break;
             case R.id.read_book:
                 FragmentBookDetail detail = new FragmentBookDetail();
                 Bundle args = new Bundle();
-                args.putInt("menuId", bookBean.getPageId());
-                args.putInt("bookId", bookId);
+                args.putLong("menuId", bookController.getBookLastReadMenuId(bookId));
+                args.putLong("bookId", bookId);
                 detail.setArguments(args);
                 FragmentHelper.getInstance().addFragment(detail);
                 break;

@@ -1,14 +1,14 @@
 package com.delcache.hera.interfaces;
 
 import com.delcache.hera.bean.*;
+import com.delcache.hera.bean.table.BookBean;
+import com.delcache.hera.bean.table.BookMenuBean;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import retrofit2.http.QueryMap;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ApiInterface {
 
@@ -36,17 +36,17 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("v1/book/info")
-    Observable<HttpResult<BookBean>> getBookInfo(@Field("book_id") int bookId);
+    Observable<HttpResult<BookBean>> getBookInfo(@Field("book_id") long bookId);
 
     @FormUrlEncoded
     @POST("v1/book/detail")
-    Observable<HttpResult<BookMenuBean>> getBookDetail(@Field("book_id") int bookId, @Field("menu_id") int menuId);
+    Observable<HttpResult<BookMenuBean>> getBookDetail(@Field("book_id") long bookId, @Field("menu_id") long menuId);
 
     @FormUrlEncoded
     @POST("v1/user/add-to-collection")
-    Observable<HttpResult<Object>> addToCollection(@Field("book_id") int bookId);
+    Observable<HttpResult<Object>> addToCollection(@Field("book_id") long bookId);
 
     @FormUrlEncoded
     @POST("v1/book/get-menu-list")
-    Observable<HttpResult<List<BookMenuBean>>> getMenuList(@Field("book_id") int bookId);
+    Observable<HttpResult<List<BookMenuBean>>> getMenuList(@Field("book_id") long bookId);
 }

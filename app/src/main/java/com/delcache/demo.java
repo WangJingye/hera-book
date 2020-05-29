@@ -1,12 +1,11 @@
 package com.delcache;
 
-import com.delcache.hera.bean.HttpResult;
-import com.delcache.hera.bean.UserBean;
+import com.delcache.hera.helper.RequestHelper;
 
 public class demo {
 
     public static void main(String args[]) {
-        HttpResult<UserBean> h=new HttpResult<>();
-       System.out.println( h.getEmpty()==null);
+        RequestHelper.getInstance().homeRequest().doOnNext(homeBean -> {
+        });
     }
 }

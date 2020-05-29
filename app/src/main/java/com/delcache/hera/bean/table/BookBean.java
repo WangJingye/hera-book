@@ -1,37 +1,59 @@
-package com.delcache.hera.bean;
+package com.delcache.hera.bean.table;
 
+import com.delcache.hera.bean.BaseBean;
 import com.google.gson.annotations.SerializedName;
+import com.orm.dsl.Column;
+import com.orm.dsl.Ignore;
 
 import java.util.List;
 
 public class BookBean extends BaseBean {
 
     @SerializedName("book_id")
-    private int bookId;
+    @Column(name = "book_id", unique = true)
+    private long bookId;
+
     @SerializedName("title")
+    @Column(name = "title")
     private String title;
+
     @SerializedName("pic")
+    @Column(name = "pic")
     private String pic;
+
     @SerializedName("desc")
+    @Column(name = "desc")
     private String desc;
+
     @SerializedName("author")
+    @Column(name = "author")
     private String author;
+
     @SerializedName("category_name")
+    @Column(name = "category_name")
     private String categoryName;
+
     @SerializedName("is_end")
+    @Column(name = "is_end")
     private int isEnd;
+
     @SerializedName("is_added")
+    @Column(name = "is_added")
     private int isAdded;
+
     @SerializedName("page_id")
-    private int pageId;
+    @Column(name = "page_id")
+    private long pageId;
+
+    @Ignore
     @SerializedName("list")
     private List<BookMenuBean> menuList;
 
-    public int getBookId() {
+    public long getBookId() {
         return bookId;
     }
 
-    public void setBookId(int bookId) {
+    public void setBookId(long bookId) {
         this.bookId = bookId;
     }
 
@@ -83,11 +105,11 @@ public class BookBean extends BaseBean {
         this.isAdded = isAdded;
     }
 
-    public int getPageId() {
+    public long getPageId() {
         return pageId;
     }
 
-    public void setPageId(int pageId) {
+    public void setPageId(long pageId) {
         this.pageId = pageId;
     }
 

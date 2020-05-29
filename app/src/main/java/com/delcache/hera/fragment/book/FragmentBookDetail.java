@@ -9,11 +9,10 @@ import android.widget.*;
 import butterknife.BindView;
 import com.delcache.hera.R;
 import com.delcache.hera.adapter.DetailListAdapter;
-import com.delcache.hera.bean.BookBean;
-import com.delcache.hera.bean.BookMenuBean;
-import com.delcache.hera.controller.user.BookController;
+import com.delcache.hera.bean.table.BookBean;
+import com.delcache.hera.bean.table.BookMenuBean;
+import com.delcache.hera.controller.book.BookController;
 import com.delcache.hera.fragment.base.BaseFragment;
-import com.delcache.hera.helper.FragmentHelper;
 import com.delcache.hera.utils.Constants;
 import com.delcache.hera.utils.Utils;
 import com.delcache.hera.widget.CustomToolbar;
@@ -32,8 +31,8 @@ public class FragmentBookDetail extends BaseFragment {
     CustomToolbar toolbar;
 
     private GestureDetector mGestureDetector;
-    private int menuId;
-    private int bookId;
+    private long menuId;
+    private long bookId;
     private BookMenuBean bookMenuBean;
     private BookBean bookBean;
     private PopupWindow popupWindow;
@@ -70,8 +69,8 @@ public class FragmentBookDetail extends BaseFragment {
     protected void setupData() {
         bookController = new BookController(mContext, this);
         if (getArguments() != null) {
-            this.menuId = getArguments().getInt("menuId");
-            this.bookId = getArguments().getInt("bookId");
+            this.menuId = getArguments().getLong("menuId");
+            this.bookId = getArguments().getLong("bookId");
         }
     }
 

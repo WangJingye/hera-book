@@ -1,29 +1,48 @@
-package com.delcache.hera.bean;
+package com.delcache.hera.bean.table;
 
+import com.delcache.hera.bean.BaseBean;
 import com.google.gson.annotations.SerializedName;
+import com.orm.dsl.Column;
 
 public class BookMenuBean extends BaseBean {
 
+    @SerializedName("book_id")
+    @Column(name = "book_id")
+    private long bookId;
+
     @SerializedName("menu_id")
-    private int menuId;
+    @Column(name = "menu_id")
+    private long menuId;
 
     @SerializedName("title")
+    @Column(name = "title")
     private String title;
 
     @SerializedName("content")
+    @Column(name = "detail")
     private String detail;
 
     @SerializedName("prev")
-    private int prevId;
+    @Column(name = "prev_id")
+    private long prevId;
 
     @SerializedName("next")
-    private int nextId;
+    @Column(name = "next_id")
+    private long nextId;
 
-    public int getMenuId() {
+    public long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
+    }
+
+    public long getMenuId() {
         return menuId;
     }
 
-    public void setMenuId(int menuId) {
+    public void setMenuId(long menuId) {
         this.menuId = menuId;
     }
 
@@ -43,19 +62,19 @@ public class BookMenuBean extends BaseBean {
         this.detail = detail;
     }
 
-    public int getPrevId() {
+    public long getPrevId() {
         return prevId;
     }
 
-    public void setPrevId(int prevId) {
+    public void setPrevId(long prevId) {
         this.prevId = prevId;
     }
 
-    public int getNextId() {
+    public long getNextId() {
         return nextId;
     }
 
-    public void setNextId(int nextId) {
+    public void setNextId(long nextId) {
         this.nextId = nextId;
     }
 }

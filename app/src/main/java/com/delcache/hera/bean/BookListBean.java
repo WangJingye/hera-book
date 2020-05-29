@@ -1,5 +1,6 @@
 package com.delcache.hera.bean;
 
+import com.delcache.hera.bean.table.BookBean;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
